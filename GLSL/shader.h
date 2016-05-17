@@ -1,4 +1,5 @@
 // Load a new image from a raw RGB file directly into OpenGL memory
+
 #include <fstream>
 GLuint LoadImage(const std::string &image_file, unsigned int width, unsigned int height)
 {
@@ -49,8 +50,9 @@ void InitializeGeometry(GLuint program_id)
   glBindVertexArray(vao);
 
   // 顶点缓存
-  GLfloat tempv[8] = {-1.0f,-1.0f,1.0f,-1.0f,-1.0f,1.0f,1.0f, 1.0f};  //二维顶点坐标，分别为矩形的四个顶点坐标
-  std::vector<GLfloat> vertex_buffer(tempv , tempv+8);  
+  GLfloat tempv[12] = {-1.0, -1.0,1.0, -1.0,1.0,  1.0,1.0,  1.0,-1.0,  1.0,-1.0, -1.0};
+  //GLfloat tempv[8] = {-1.0f,-1.0f,1.0f,-1.0f,-1.0f,1.0f,1.0f, 1.0f};  //二维顶点坐标，分别为矩形的四个顶点坐标
+  std::vector<GLfloat> vertex_buffer(tempv , tempv+12);  
   // Generate a vertex buffer object
   GLuint vbo;
   glGenBuffers(1, &vbo);
@@ -130,7 +132,7 @@ GLuint ShaderProgram(const std::string &vertex_shader_file, const std::string &f
   glBindFragDataLocation(program_id, 0, "FragmentColor");
   glLinkProgram(program_id);
 
-  // Check program log
+  // 打印显示程序链接、编译等错误信息
   glGetProgramiv(program_id, GL_LINK_STATUS, &result);
   if (result == GL_FALSE) {
     glGetProgramiv(program_id, GL_INFO_LOG_LENGTH, &info_length);
