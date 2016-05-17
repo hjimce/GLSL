@@ -41,7 +41,7 @@ int main( int argc, char** argv )
 		return EXIT_FAILURE;
 	}
 //2、读取、创建shader程序，编译连接等
-	auto program_id = ShaderProgram("gl_texture.vert", "gl_texture.frag");
+	auto program_id = ShaderProgram("shader/gl_texture.vert", "shader/gl_texture.frag");
 	glUseProgram(program_id);
 
 //3、设置纹理相关参数、或者输入shader计算所需要的数据
